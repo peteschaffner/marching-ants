@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Marching Ants test</title>
+
+    <link rel="stylesheet" href="../build/build.css">
+  </head>
+  <body>
+
+    <div class="upload">
+      <h2>Upload your video(s).</h2>
+      <p>Drag your video files here to upload</p>
+    </div>
+
+    <script src="../build/build.js"></script>
+    <script>
+      var MarchingAnts = require('marching-ants');
+      var els = document.querySelectorAll('.upload');
+
+      MarchingAnts(els);
+    </script>
+  </body>
+</html>
