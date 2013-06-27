@@ -1,0 +1,1 @@
+module.exports = '<svg>\n  <g fill="none" stroke="black" stroke-width="2">\n    <rect stroke-dasharray="6,5"  width="200" height="200" rx="5" ry="5" y="1" x="1" />\n  </g>\n</svg>\n';
