@@ -4,9 +4,11 @@
   "description": "SVG marching ants (with CSS fallback) for file upload UI",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "component/emitter": "*",
+    "component/jquery": "*"
+  },
   "development": {},
-  "license": "MIT",
   "main": "index.js",
   "scripts": [
     "index.js",
@@ -14,5 +16,6 @@
   ],
   "styles": [
     "marching-ants.css"
-  ]
+  ],
+  "license": "MIT"
 }
