@@ -3,20 +3,35 @@
     <title>Marching Ants test</title>
 
     <link rel="stylesheet" href="../build/build.css">
+    <style>
+      body {
+        padding: 50px;
+        font: 14px sans-serif;
+      }
+    </style>
   </head>
   <body>
+    
+    <img src="kitten.jpg" title="Drag me!" width="100" style="margin: 50px 0;">
 
-    <div class="upload">
+    <!-- Wrapper -->
+    <div class="upload" style="padding: 50px; height: 40%;">
       <h2>Upload your video(s).</h2>
       <p>Drag your video files here to upload</p>
     </div>
-
+    
+    <!-- Block level element -->
+    <h2 class="upload" style="width: 200px; height: 200px; text-align: center; line-height: 200px;">Upload here</h2>
+    
+    <!-- Inline element -->
+    <p>You should try <a href="#" class="upload" style="padding: 10px;">uploading here.</a></p>
+    
     <script src="../build/build.js"></script>
     <script>
-      var MarchingAnts = require('marching-ants');
-      var els = document.querySelectorAll('.upload');
-
-      MarchingAnts(els);
+      var marchingAnts = require('marching-ants');
+      var $ = require('jquery');
+      
+      marchingAnts($('.upload'));
     </script>
   </body>
 </html>
