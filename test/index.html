@@ -26,12 +26,17 @@
     <!-- Inline element -->
     <p>You should try <a href="#" class="upload" style="padding: 10px;">uploading here.</a></p>
     
+    <!-- One-off element -->
+    <p id="upload" style="padding: 30px;">Upload here, I'm special!</p>
+    
     <script src="../build/build.js"></script>
     <script>
-      var marchingAnts = require('marching-ants');
+      var MarchingAnts = require('marching-ants');
       var $ = require('jquery');
       
-      marchingAnts($('.upload'));
+      MarchingAnts($('.upload'));
+      
+      var upload = new MarchingAnts($('#upload'), 30);
     </script>
   </body>
 </html>
