@@ -48,15 +48,17 @@ function marchingAnts(els, options) {
  *  - `strokeDasharray` dash size and spacing ['6,5']
  *  - `fill` fill color ['none']
  *
- * @param {Element} el
+ * @param {Mixed} el
  * @param {Object|Number} options or speed
  * @api public
  */
 
 function MarchingAnts (el, options) {
   if (!(this instanceof MarchingAnts)) return marchingAnts(el, options);
-  if (!this.svgTest()) return $(el).addClass('ma-no-svg');
+  if (!svgTest()) return $(el).addClass('ma-no-svg');
   if (typeof options === 'number') options = { speed : options };
+  
+  var self = this;
   
   this.options = $.extend({
     speed: 60,
@@ -93,30 +95,12 @@ function MarchingAnts (el, options) {
   this.el.css('border-radius', this.options.radius + 1);
   
   // append ants and bind events
-  this.attach(this.el);
-}
-
-/**
- * Mixin emitter.
- */
-
-Emitter(MarchingAnts.prototype);
-
-/**
- * Attach to the given `el`.
- *
- * @param {Element} el
- * @api public
- */
-
-MarchingAnts.prototype.attach = function(el) {
-  var self = this;
-  
-  $(el).addClass('ma')
+  this.el.addClass('ma')
     .append(this.ants)
     .on('dragenter', function() {
       self.el.addClass('over');
     });
+    
   // need to use an overlay to fix the `dragenter`
   // event firing for every child node
   this.overlay.on('dragenter', this.march.bind(this));
@@ -124,9 +108,14 @@ MarchingAnts.prototype.attach = function(el) {
   this.overlay.on('dragleave', this.stop.bind(this));
   
   // handle element resizing
-  $(window).resize(this.resize.bind(this));
-  return this;
-};
+  $(window).resize(resize(this));
+}
+
+/**
+ * Mixin emitter.
+ */
+
+Emitter(MarchingAnts.prototype);
 
 /**
  * Make the ants march.
@@ -137,10 +126,12 @@ MarchingAnts.prototype.attach = function(el) {
 MarchingAnts.prototype.march = function() {
   var self = this;
   
+  if (this.isMarching) return;
   this.emit('march');
   this.interval = setInterval(function() {
     self.rect.attr('stroke-dashoffset', self.rect.attr('stroke-dashoffset')-1);
   }, this.options.speed);
+  this.isMarching = true;
 };
 
 /**
@@ -150,23 +141,26 @@ MarchingAnts.prototype.march = function() {
  */
 
 MarchingAnts.prototype.stop = function() {
+  if (!this.isMarching) return;
   this.emit('stop');
   clearInterval(this.interval);
   this.el.removeClass('over');
+  this.isMarching = false;
 };
 
 /**
  * Resize the ants (based on window resize).
  * 
+ * @param {MarchingAnts} obj
  * @api private
  */
 
-MarchingAnts.prototype.resize = function() {
-  if (this.el.outerWidth() !== this.width ||
-    this.el.outerHeight() !== this.height) {
-    this.rect.attr({
-      width: this.el.outerWidth() - (this.options.strokeWidth * 2),
-      height: this.el.outerHeight() - (this.options.strokeWidth * 2)
+function resize(obj) {
+  if (obj.el.outerWidth() !== obj.width ||
+    obj.el.outerHeight() !== obj.height) {
+    obj.rect.attr({
+      width: obj.el.outerWidth() - (obj.options.strokeWidth * 2),
+      height: obj.el.outerHeight() - (obj.options.strokeWidth * 2)
     });
   }
 };
@@ -177,7 +171,7 @@ MarchingAnts.prototype.resize = function() {
  * @api private
  */
 
-MarchingAnts.prototype.svgTest = function() {
+function svgTest() {
   var div = document.createElement('div');
   
   div.innerHTML = '<svg/>';

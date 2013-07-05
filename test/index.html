@@ -32,11 +32,10 @@
     <script src="../build/build.js"></script>
     <script>
       var MarchingAnts = require('marching-ants');
-      var $ = require('jquery');
       
-      MarchingAnts($('.upload'));
+      MarchingAnts('.upload');
       
-      var upload = new MarchingAnts($('#upload'), 30);
+      var upload = new MarchingAnts('#upload', 30);
     </script>
   </body>
 </html>
