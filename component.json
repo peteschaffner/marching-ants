@@ -1,7 +1,7 @@
 {
   "name": "marching-ants",
   "repo": "peteschaffner/marching-ants",
-  "description": "SVG marching ants (with CSS fallback) for file upload UI",
+  "description": "SVG marching ants for file upload UI",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {

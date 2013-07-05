@@ -1,7 +1,7 @@
 
 # Marching Ants
 
-  SVG marching ants (with CSS fallback) for file upload UI
+  SVG marching ants for file upload UI
 
 ## Installation
 
