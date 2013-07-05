@@ -54,9 +54,9 @@ function marchingAnts(els, options) {
  */
 
 function MarchingAnts (el, options) {
-  if (!(this instanceof MarchingAnts)) return marchingAnts(el, options);
-  if (!svgTest()) return $(el).addClass('ma-no-svg');
-  if (typeof options === 'number') options = { speed : options };
+  if (!(this instanceof MarchingAnts)) { return marchingAnts(el, options); }
+  if (!svgTest()) { return $(el).addClass('ma-no-svg'); }
+  if (typeof options === 'number') { options = { speed : options }; }
   
   var self = this;
   
@@ -126,7 +126,7 @@ Emitter(MarchingAnts.prototype);
 MarchingAnts.prototype.march = function() {
   var self = this;
   
-  if (this.isMarching) return;
+  if (this.isMarching) { return; }
   this.emit('march');
   this.interval = setInterval(function() {
     self.rect.attr('stroke-dashoffset', self.rect.attr('stroke-dashoffset')-1);
@@ -141,7 +141,7 @@ MarchingAnts.prototype.march = function() {
  */
 
 MarchingAnts.prototype.stop = function() {
-  if (!this.isMarching) return;
+  if (!this.isMarching) { return; }
   this.emit('stop');
   clearInterval(this.interval);
   this.el.removeClass('over');
@@ -163,7 +163,7 @@ function resize(obj) {
       height: obj.el.outerHeight() - (obj.options.strokeWidth * 2)
     });
   }
-};
+}
 
 /**
  * Test for svg support.
@@ -173,7 +173,8 @@ function resize(obj) {
 
 function svgTest() {
   var div = document.createElement('div');
+  var ns = 'http://www.w3.org/2000/svg';
   
   div.innerHTML = '<svg/>';
-  return (div.firstChild && div.firstChild.namespaceURI) == 'http://www.w3.org/2000/svg';
-};
+  return (div.firstChild && div.firstChild.namespaceURI) == ns;
+}
