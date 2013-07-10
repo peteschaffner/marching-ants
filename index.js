@@ -108,7 +108,7 @@ function MarchingAnts (el, options) {
   this.overlay.on('dragleave', this.stop.bind(this));
   
   // handle element resizing
-  $(window).resize(resize(this));
+  $(window).resize(function() { resize(self); });
 }
 
 /**
